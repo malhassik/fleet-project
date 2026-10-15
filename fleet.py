@@ -115,15 +115,20 @@ class Car(Vehicle):
         print(f"Топливо: {self.fuel_type}")
 
     def __str__(self):
-        return f"{self.seats} {self.fuel_type}"
+        return f"Легковая: {self.brand} {self.model} ({self.year})"
 
     def __repr__(self):
-        return f"Car(seats={self.seats}, fuel_type={self.fuel_type})"
+        return f"Car(brand={self.brand}, model={self.model}, year={self.year}, seats={self.seats})"
 
     def __eq__(self, other):
         if not isinstance(other, Car):
             return False
-        return self.seats == other.seats and self.fuel_type == other.fuel_type
+        return (
+            super().__eq__(other)
+            and self.seats == other.seats
+            and self.seats == other.seats
+            and self.fuel_type == other.fuel_type
+        )
 
 
 class Truck(Vehicle):
@@ -138,7 +143,7 @@ class Truck(Vehicle):
 
     @capacity_kg.setter
     def capacity_kg(self, value):
-        if value < 0:
+        if not isinstance(value, (int, float)) or value <= 0:
             raise ValueError("Грузоподъёмность должна быть положительной")
         self._capacity_kg = value
 
@@ -148,7 +153,7 @@ class Truck(Vehicle):
 
     @axles.setter
     def axles(self, value):
-        if value < 2 and not isinstance(value, int):
+        if not isinstance(value, int) or value < 2:
             raise ValueError("У грузовика минимум 2 оси")
         self._axles = value
 
@@ -158,12 +163,16 @@ class Truck(Vehicle):
         print(f"Осей: {self.axles}")
 
     def __str__(self):
-        return f"{self.axles} {self.capacity_kg}"
+        return f"Грузовая: {self.brand} {self.model} ({self.year})"
 
     def __repr__(self):
-        return f"Truck(axles={self.axles}, capacity_kg={self.capacity_kg})"
+        return f"Truck(brand={self.brand}, model={self.model}, year={self.year}, capacity_kg={self.capacity_kg})"
 
     def __eq__(self, other):
         if not isinstance(other, Truck):
             return False
-        return self.axles == other.axles and self.capacity_kg == other.capacity_kg
+        return (
+            super().__eq__(other)
+            and self.axles == other.axles
+            and self.capacity_kg == other.capacity_kg
+        )
