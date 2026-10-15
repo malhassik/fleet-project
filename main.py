@@ -1,4 +1,4 @@
-from fleet import Vehicle, Car
+from fleet import Vehicle, Car, Truck
 
 print("Тест класса Vehicle\n")
 
@@ -30,3 +30,22 @@ except ValueError as e:
     print("Ошибка: ", e)
 
 print("\n\n")
+
+print("Тест класса Truck\n")
+
+truck = Truck("Volvo", "FH16", 2020, 500000, 20000, 3)
+truck.info()
+print(truck)
+print(repr(truck))
+
+truck2 = Truck("Volvo", "FH16", 2020, 600000, 20000, 3)
+print(truck == truck2)  # True
+
+truck3 = Truck("MAN", "TGX", 2019, 400000, 15000, 2)
+print(truck == truck3)  # False
+
+# валидация
+try:
+    truck.axles = 1
+except ValueError as e:
+    print("Ошибка:", e)
