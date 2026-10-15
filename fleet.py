@@ -66,3 +66,12 @@ class Vehicle:
 
     def __repr__(self):
         return f"Vehicle(brand={self.brand}, model={self.model}, year={self.year})"
+
+    def __eq__(self, other):
+        if not isinstance(other, Vehicle):
+            return False
+        return (
+            self.brand == other.brand
+            and self.model == other.model
+            and self.year == other.year
+        )
