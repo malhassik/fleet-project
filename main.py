@@ -1,7 +1,7 @@
 from fleet import Vehicle
 
 v1 = Vehicle("Volvo", "FH16", 2020, 150000)
-print(v1.info())  # Volvo FH16 (2020), пробег: 150000 км
+v1.info()  # Volvo FH16 (2020), пробег: 150000 км
 print(v1)  # Volvo FH16 (2020)
 print(repr(v1))  # Vehicle(brand=Volvo, model=FH16, year=2020)
 
