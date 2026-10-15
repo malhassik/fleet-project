@@ -114,6 +114,17 @@ class Car(Vehicle):
         print(f"Мест: {self.seats}")
         print(f"Топливо: {self.fuel_type}")
 
+    def __str__(self):
+        return f"{self.seats} {self.fuel_type}"
+
+    def __repr__(self):
+        return f"Car(seats={self.seats}, fuel_type={self.fuel_type})"
+
+    def __eq__(self, other):
+        if not isinstance(other, Car):
+            return False
+        return self.seats == other.seats and self.fuel_type == other.fuel_type
+
 
 class Truck(Vehicle):
     def __init__(self, brand, model, year, mileage, capacity_kg, axles):
