@@ -6,6 +6,7 @@ class Vehicle:
         self.model = model
         self.year = year
         self.mileage = mileage
+        self.available = True
 
     # Геттер для brand
     @property
@@ -270,7 +271,14 @@ class Fleet:
         if not found:
             print("Нет доступных машин")
 
-    def show_all(self): ...
+    def show_all(self):
+        print("Все машины в автопарке")
+        for vehicle in self.vehicles:
+            print(vehicle)
+
+        print("Все водители в автопарке")
+        for driver in self.drivers:
+            print(driver)
 
     def find_by_brand(self, brand): ...
 
