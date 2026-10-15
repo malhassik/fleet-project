@@ -145,3 +145,14 @@ class Truck(Vehicle):
         super().info()
         print(f"Грузоподъёмность: {self.capacity_kg} кг")
         print(f"Осей: {self.axles}")
+
+    def __str__(self):
+        return f"{self.axles} {self.capacity_kg}"
+
+    def __repr__(self):
+        return f"Truck(axles={self.axles}, capacity_kg={self.capacity_kg})"
+
+    def __eq__(self, other):
+        if not isinstance(other, Truck):
+            return False
+        return self.axles == other.axles and self.capacity_kg == other.capacity_kg
