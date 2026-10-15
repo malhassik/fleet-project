@@ -125,3 +125,13 @@ try:
     fleet.add_vehicle(car1)
 except ValueError as e:
     print("Ошибка:", e)
+
+print(".............." * 3)
+
+fleet.save_to_json("fleet.json")
+
+new_fleet = Fleet()
+new_fleet.load_from_json("fleet.json")
+
+print(new_fleet)
+new_fleet.show_all()

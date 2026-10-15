@@ -1,3 +1,6 @@
+import json
+
+
 class Vehicle:
 
     # Конструктор класса
@@ -307,3 +310,65 @@ class Fleet:
 
     def __str__(self):
         return f"Автопарк: {len(self.vehicles)} машин, {len(self.drivers)} водителей"
+
+    def save_to_json(self, path):
+        vehicles_data = []
+        for v in self.vehicles:
+            v_dict = {
+                "type": Car,
+                "brand": v.brand,
+                "model": v.model,
+                "year": v.year,
+                "mileage": v.mileage,
+                "available": v.available,
+            }
+            if isinstance(v, Car):
+                v_dict["type"] = "car"
+                v_dict["seats"] = v.seats
+                v_dict["fuel_type"] = v.fuel_type
+            elif isinstance(v, Truck):
+                v_dict["type"] = "truck"
+                v_dict["capacity_kg"] = v.capacity_kg
+                v_dict["axles"] = v.axles
+            else:
+                v_dict["type"] = "vehicle"
+
+            vehicles_data.append(v_dict)
+
+        drivers_data = []
+        for d in self.drivers:
+            d_dict = {
+                "name": d.name,
+                "license_number": d.license_number,
+            }
+            drivers_data.append(d_dict)
+
+        result = {
+            "vehicles": vehicles_data,
+            "drivers": drivers_data,
+        }
+
+        with open(path, "w", encoding="utf-8") as file:
+            json.dump(result, file, ensure_ascii=False, indent=2)
+
+    def load_from_json(self, path):
+        with open(path, encoding="utf-8") as file:
+            data = json.load(file)
+
+        for v_dict in data["vehicles"]:
+            vtype = v_dict.pop("type")  # вынуть "type" из словаря
+            available = v_dict.pop("available", True)  # вынуть "available"
+
+            if vtype == "car":
+                vehicle = Car(**v_dict)
+            elif vtype == "truck":
+                vehicle = Truck(**v_dict)
+            else:
+                vehicle = Vehicle(**v_dict)
+
+            vehicle.available = available
+            self.add_vehicle(vehicle)
+
+        for d_dict in data["drivers"]:
+            driver = Driver(**d_dict)
+            self.add_driver(driver)
