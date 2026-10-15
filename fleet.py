@@ -127,7 +127,6 @@ class Car(Vehicle):
         return (
             super().__eq__(other)
             and self.seats == other.seats
-            and self.seats == other.seats
             and self.fuel_type == other.fuel_type
         )
 
