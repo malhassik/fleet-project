@@ -140,3 +140,8 @@ class Truck(Vehicle):
         if value < 2 and not isinstance(value, int):
             raise ValueError("У грузовика минимум 2 оси")
         self._axles = value
+
+    def info(self):
+        super().info()
+        print(f"Грузоподъёмность: {self.capacity_kg} кг")
+        print(f"Осей: {self.axles}")
