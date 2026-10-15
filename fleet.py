@@ -12,7 +12,7 @@ class Vehicle:
     def brand(self):
         return self._brand
 
-    # Сеттар для brand
+    # Сеттер для brand
     @brand.setter
     def brand(self, value):
         if not value:
@@ -24,7 +24,7 @@ class Vehicle:
     def model(self):
         return self._model
 
-    # Сеттар для model
+    # Сеттер для model
     @model.setter
     def model(self, value):
         if not value:
