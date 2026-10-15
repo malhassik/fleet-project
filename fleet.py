@@ -176,3 +176,67 @@ class Truck(Vehicle):
             and self.axles == other.axles
             and self.capacity_kg == other.capacity_kg
         )
+
+
+class Driver:
+    def __init__(self, name, license_number, assigned_vehicle=None):
+        self.name = name
+        self.license_number = license_number
+        self.assigned_vehicle = assigned_vehicle
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if not value:
+            raise ValueError("Имя не может быть пустым")
+        self._name = value
+
+    @property
+    def license_number(self):
+        return self._license_number
+
+    @license_number.setter
+    def license_number(self, value):
+        if not value:
+            raise ValueError("Номер удостоверения не может быть пустым")
+        self._license_number = value
+
+    @property
+    def assigned_vehicle(self):
+        return self._assigned_vehicle
+
+    @assigned_vehicle.setter
+    def assigned_vehicle(self, value):
+        if value is not None and not isinstance(value, Vehicle):
+            raise ValueError("Можно закрепить только транспортное средство")
+        self._assigned_vehicle = value
+
+    def assign(self, vehicle):
+        self.assigned_vehicle = vehicle
+
+    def unassign(self):
+        self.assigned_vehicle = None
+
+    def info(self):
+        print(f"Водитель: {self.name}")
+        print(f"Удостоверение: {self.license_number}")
+        if self.assigned_vehicle:
+            print(
+                f"Машина: {self.assigned_vehicle.brand} {self.assigned_vehicle.model}"
+            )
+        else:
+            print("Машина: не закреплена")
+
+    def __str__(self):
+        return f"Водитель: {self.name}, Удостоверение: {self.license_number}"
+
+    def __repr__(self):
+        return f"Driver(name={self.name},license_number={self.license_number})"
+
+    def __eq__(self, other):
+        if not isinstance(other, Driver):
+            return False
+        return self.license_number == other.license_number

@@ -1,4 +1,4 @@
-from fleet import Vehicle, Car, Truck
+from fleet import Vehicle, Car, Truck, Driver
 
 print("Тест класса Vehicle\n")
 
@@ -49,3 +49,26 @@ try:
     truck.axles = 1
 except ValueError as e:
     print("Ошибка:", e)
+
+print("\nТест класса Driver\n")
+
+driver = Driver("Иван", "ABC123")
+driver.info()
+
+car = Car("Volvo", "XC90", 2022, 30000, 5, "бензин")
+driver.assign(car)
+driver.info()
+
+driver.unassign()
+driver.info()
+
+# валидация
+try:
+    driver.assigned_vehicle = "не машина"
+except ValueError as e:
+    print("Ошибка:", e)
+
+driver2 = Driver("Пётр", "XYZ789")
+print(driver == driver2)  # False
+driver3 = Driver("Иван", "ABC123")
+print(driver == driver3)  # True — одинаковый license_number
