@@ -1,4 +1,4 @@
-from fleet import Vehicle
+from fleet import Vehicle, Car
 
 v1 = Vehicle("Volvo", "FH16", 2020, 150000)
 v1.info()  # Volvo FH16 (2020), пробег: 150000 км
@@ -15,3 +15,6 @@ try:
     v1.year = 1800
 except ValueError as e:
     print("Ошибка: ", e)
+
+c1 = Car("Volvo", "FH16", 2020, 150000, 5, "Бензин")
+c1.info()
