@@ -282,7 +282,12 @@ class Fleet:
         for driver in self.drivers:
             print(driver)
 
-    def find_by_brand(self, brand): ...
+    def find_by_brand(self, brand):
+        result = []
+        for vehicle in self.vehicles:
+            if vehicle.brand.lower() == brand.lower():
+                result.append(vehicle)
+        return result
 
     def assign_driver(self, driver, vehicle): ...
 
