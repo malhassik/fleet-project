@@ -289,9 +289,19 @@ class Fleet:
                 result.append(vehicle)
         return result
 
-    def assign_driver(self, driver, vehicle): ...
+    def assign_driver(self, driver, vehicle):
+        if vehicle.available:
+            driver.assign(vehicle)
+            vehicle.available = False
+        else:
+            print(f"{vehicle} уже занята")
 
-    def release_driver(self, driver): ...
+    def release_driver(self, driver):
+        if driver.assigned_vehicle:
+            driver.assigned_vehicle.available = True
+            driver.unassign()
+        else:
+            print("У водителя нет машины")
 
     def __len__(self):
         return len(self.vehicles)
