@@ -276,6 +276,8 @@ class Fleet:
         for vehicle in self.vehicles:
             print(vehicle)
 
+        print()
+
         print("Все водители в автопарке")
         for driver in self.drivers:
             print(driver)
