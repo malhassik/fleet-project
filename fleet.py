@@ -113,3 +113,30 @@ class Car(Vehicle):
         super().info()  # вызывается info() из Vehicle
         print(f"Мест: {self.seats}")
         print(f"Топливо: {self.fuel_type}")
+
+
+class Truck(Vehicle):
+    def __init__(self, brand, model, year, mileage, capacity_kg, axles):
+        super().__init__(brand, model, year, mileage)
+        self.capacity_kg = capacity_kg
+        self.axles = axles
+
+    @property
+    def capacity_kg(self):
+        return self._capacity_kg
+
+    @capacity_kg.setter
+    def capacity_kg(self, value):
+        if value < 0:
+            raise ValueError("Грузоподъёмность должна быть положительной")
+        self._capacity_kg = value
+
+    @property
+    def axles(self):
+        return self._axles
+
+    @axles.setter
+    def axles(self, value):
+        if value < 2 and not isinstance(value, int):
+            raise ValueError("У грузовика минимум 2 оси")
+        self._axles = value
