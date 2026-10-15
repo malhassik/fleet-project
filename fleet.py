@@ -85,36 +85,31 @@ class Car(Vehicle):
         self.seats = seats
         self.fuel_type = fuel_type
 
+    # Геттер для seats
+    @property
+    def seats(self):
+        return self._seats
 
-# Геттер для seats
-@property
-def seats(self):
-    return self._seats
+    # Сеттер для seats
+    @seats.setter
+    def seats(self, value):
+        if not (isinstance(value, int) and value > 0):
+            raise ValueError("Мест должно быть больше 0")
+        self._seats = value
 
+    # Геттер для fuel_type
+    @property
+    def fuel_type(self):
+        return self._fuel_type
 
-# Сеттер для seats
-@seats.setter
-def seats(self, value):
-    if not (isinstance(value, int) and value > 0):
-        raise ValueError("Мест должно быть больше 0")
-    self._seats = value
+    # Сеттер для fuel_type
+    @fuel_type.setter
+    def fuel_type(self, value):
+        if not value:
+            raise ValueError("Топливо не может быть пустым")
+        self._fuel_type = value
 
-
-# Геттер для fuel_type
-@property
-def fuel_type(self):
-    return self._fuel_type
-
-
-# Сеттер для fuel_type
-@fuel_type.setter
-def fuel_type(self, value):
-    if not value:
-        raise ValueError("Топливо не может быть пустым")
-    self._fuel_type = value
-
-
-def info(self):
-    super().info()  # вызывается info() из Vehicle
-    print(f"Мест: {self.seats}")
-    print(f"Топливо: {self.fuel_type}")
+    def info(self):
+        super().info()  # вызывается info() из Vehicle
+        print(f"Мест: {self.seats}")
+        print(f"Топливо: {self.fuel_type}")
