@@ -240,3 +240,46 @@ class Driver:
         if not isinstance(other, Driver):
             return False
         return self.license_number == other.license_number
+
+
+class Fleet:
+    def __init__(self):
+        self.vehicles = []
+        self.drivers = []
+
+    def add_vehicle(self, vehicle):
+        if not isinstance(vehicle, Vehicle):
+            raise ValueError("Можно добавить только транспортное средство")
+        if vehicle in self.vehicles:
+            raise ValueError("Такая машина уже есть в автопарке")
+        self.vehicles.append(vehicle)
+
+    def add_driver(self, driver):
+        if not isinstance(driver, Driver):
+            raise ValueError("Можно добавить только водителя")
+        if driver in self.drivers:
+            raise ValueError("Такой водитель уже есть в автопарке")
+        self.drivers.append(driver)
+
+    def show_available(self):
+        found = False
+        for vehicle in self.vehicles:
+            if vehicle.available:
+                print(vehicle)
+                found = True
+        if not found:
+            print("Нет доступных машин")
+
+    def show_all(self): ...
+
+    def find_by_brand(self, brand): ...
+
+    def assign_driver(self, driver, vehicle): ...
+
+    def release_driver(self, driver): ...
+
+    def __len__(self):
+        return len(self.vehicles)
+
+    def __str__(self):
+        return f"Автопарк: {len(self.vehicles)} машин, {len(self.drivers)} водителей"
